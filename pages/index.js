@@ -9,7 +9,7 @@ const Index = () => {
     setPosition({ left, top, width, height });
   };
   return (
-    <div>
+    <div className="margin">
       <nav className="menu">
         {
           Object.values(position).length> 0 && (<div className="divider"

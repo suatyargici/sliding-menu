@@ -1,19 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  --left: 0;
+  --width: 0;
+}
 
-.menu{
+.menu {
   display: flex;
   align-items: center;
-  gap:15px;
- background-color: rgba(225,225,225,.1);
+  gap: 15px;
+  background-color: rgba(225, 225, 225, 0.1);
+  position: relative;
 }
 
-.menu button{
+.menu button {
   height: 40px;
-  padding:0 15px;
-  font-size: 14px;;
-  border:none;
+  padding: 0 15px;
+  font-size: 14px;
+  border: none;
   border-radius: 5px;
 }
-.menu .divider{
-  height:5px;
+.menu .divider {
+  height: 5px;
   background-color: deepskyblue;
+  position: absolute;
+  bottom: 0;
+  left: var(--left);
+  width: var(--width);
+  transition: 0.5s all;
+}
+
+body {
+  background-color: black;
 }
