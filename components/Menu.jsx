@@ -1,24 +1,45 @@
-import React from "react";
+import { useState, createContext, useContext } from "react";
+
+const MenuContext = createContext();
 
 const Menu = ({ children }) => {
+  const [position, setPosition] = useState({});
 
   return (
-  <nav className="menu">
-    {children}
-    </nav>);
+    <MenuContext.Provider value={{ position, setPosition }}>
+      <nav className="menu">
+        {children}
+        {
+            Object.values(position).length > 0 && <Menu.Driver />
+        }
+        </nav>);
+    </MenuContext.Provider>
+  );
+};
+Menu.Driver = () => {
+  const { position } = useContext(MenuContext);
+  return (
+    <div
+      className="driver"
+      style={{
+        "--top": position.top + "px",
+        "--left": position.left + "px",
+        "--width": position.width + "px",
+        "--height": position.height + "px",
+      }}
+    />
+  );
 };
 
-Menu.Item =({children}) =>{7
+Menu.Item = ({ children }) => {
+  const { setPosition } = useContext(MenuContext);
+
+  const clickHandle = (e) => {
     const { top, width, height } = e.target.getBoundingClientRect();
     const left = e.target.offsetLeft;
-    const clickHandle = (e) =>{
-
-    }
-    return(
-        <button onClick={clickHandle}>
-            {children}
-        </button>
-    )
-}
+    setPosition({ top, left, width, height });
+  };
+  return <button onClick={clickHandle}>{children}</button>;
+};
 
 export default Menu;
